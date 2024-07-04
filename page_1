@@ -1,0 +1,186 @@
+echo "# finaclick" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/alessandroabc/finaclick.git
+git push -u origin main
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Finanças Pessoais</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="initial-screen">
+            <button id="paid-btn">Você pagou</button>
+            <button id="received-btn">Você recebeu</button>
+        </div>
+        <div id="paid-screen" style="display: none;">
+            <label for="paid-amount">Qual o valor que você pagou?</label>
+            <input type="number" id="paid-amount">
+            <label for="paid-description">Em que você gastou?</label>
+            <input type="text" id="paid-description">
+            <label for="paid-category">Qual a categoria do gasto?</label>
+            <select id="paid-category">
+                <option value="Alimentação">Alimentação</option>
+                <option value="Moradia">Moradia</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Saúde">Saúde</option>
+                <option value="Diversão">Diversão</option>
+            </select>
+            <label for="paid-classification">Qual a classificação do gasto?</label>
+            <select id="paid-classification"></select>
+            <button id="save-expense">Salvar</button>
+        </div>
+        <div id="received-screen" style="display: none;">
+            <label for="received-amount">Qual o valor que você recebeu?</label>
+            <input type="number" id="received-amount">
+            <label for="received-source">Qual a fonte do recebimento?</label>
+            <input type="text" id="received-source">
+            <button id="save-income">Salvar</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+document.getElementById('paid-btn').addEventListener('click', function() {
+    document.getElementById('initial-screen').style.display = 'none';
+    document.getElementById('paid-screen').style.display = 'block';
+});
+
+document.getElementById('received-btn').addEventListener('click', function() {
+    document.getElementById('initial-screen').style.display = 'none';
+    document.getElementById('received-screen').style.display = 'block';
+});
+
+document.getElementById('save-expense').addEventListener('click', function() {
+    const amount = document.getElementById('paid-amount').value;
+    const description = document.getElementById('paid-description').value;
+    const category = document.getElementById('paid-category').value;
+    const classification = document.getElementById('paid-classification').value;
+
+    // Aqui você pode salvar esses dados no LocalStorage ou em um backend
+    console.log({ amount, description, category, classification });
+
+    // Resetar os campos após salvar
+    document.getElementById('paid-amount').value = '';
+    document.getElementById('paid-description').value = '';
+    document.getElementById('paid-category').value = '';
+    document.getElementById('paid-classification').value = '';
+    
+    // Retornar para a tela inicial
+    document.getElementById('paid-screen').style.display = 'none';
+    document.getElementById('initial-screen').style.display = 'block';
+});
+
+document.getElementById('save-income').addEventListener('click', function() {
+    const amount = document.getElementById('received-amount').value;
+    const source = document.getElementById('received-source').value;
+
+    // Aqui você pode salvar esses dados no LocalStorage ou em um backend
+    console.log({ amount, source });
+
+    // Resetar os campos após salvar
+    document.getElementById('received-amount').value = '';
+    document.getElementById('received-source').value = '';
+    
+    // Retornar para a tela inicial
+    document.getElementById('received-screen').style.display = 'none';
+    document.getElementById('initial-screen').style.display = 'block';
+});
+finance-app/
+│
+├── index.html
+├── styles.css
+├── script.js
+├── categorias.js
+└── classificacoes.js
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Finanças Pessoais</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="initial-screen">
+            <button id="paid-btn">Você pagou</button>
+            <button id="received-btn">Você recebeu</button>
+        </div>
+        <div id="paid-screen" style="display: none;">
+            <label for="paid-amount">Qual o valor que você pagou?</label>
+            <input type="number" id="paid-amount">
+            <label for="paid-description">Em que você gastou?</label>
+            <input type="text" id="paid-description">
+            <label for="paid-category">Qual a categoria do gasto?</label>
+            <select id="paid-category"></select>
+            <label for="paid-classification">Qual a classificação do gasto?</label>
+            <select id="paid-classification"></select>
+            <button id="save-expense">Salvar</button>
+        </div>
+        <div id="received-screen" style="display: none;">
+            <label for="received-amount">Qual o valor que você recebeu?</label>
+            <input type="number" id="received-amount">
+            <label for="received-source">Qual a fonte do recebimento?</label>
+            <input type="text" id="received-source">
+            <button id="save-income">Salvar</button>
+        </div>
+    </div>
+    <script src="categorias.js"></script>
+    <script src="classificacoes.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+#app {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+const classificacoes = {
+    "Moradia": ["Aluguel", "Prestação de financiamento", "Manutenção do imóvel", "Água", "Luz", "Internet", "IPTU", "Condomínio"]
+};
